@@ -182,6 +182,7 @@ SOFTWARE.
 
 /*My own CORS to connect to any API*/
 /*CORS from anywhere*/
+```
 var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 
 function doCORSRequest(options, printResult) {
@@ -204,3 +205,4 @@ doCORSRequest({
 }, function printResult(result) {
     someGlobalVariable = JSON.parse(result).response[0];
 });
+```
