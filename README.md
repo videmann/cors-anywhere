@@ -179,3 +179,28 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+/*My own CORS to connect to any API*/
+/*CORS from anywhere*/
+var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+
+function doCORSRequest(options, printResult) {
+  var x = new XMLHttpRequest();
+  x.open(options.method, cors_api_url + options.url);
+  x.onload = x.onerror = function () {
+      printResult(x.responseText);
+  };
+  if (/^POST/i.test(options.method)) {
+      x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  }
+  x.send(options.data);
+};
+
+//Example
+doCORSRequest({
+    method: this.id === 'post' ? 'POST' : 'GET',
+    url: 'https://api.vk.com/method/users.get?user_ids=5353453&v=5.103&access_token=a679f912a679f912a679f91220a616f74faa679a79f912f863ff18097f8d9a5e166157',
+    data: ''
+}, function printResult(result) {
+    someGlobalVariable = JSON.parse(result).response[0];
+});
